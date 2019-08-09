@@ -30,4 +30,11 @@ public class UserServiceImplementation implements UserService {
 
 	}
 
+	@Override
+	public Boolean checkUser(Long id) {
+		ResponseEntity<Boolean> userMessage = restTemplate.exchange("http://localhost:8083/User/get/" + id,
+				HttpMethod.GET, null, Boolean.class);
+		return (Boolean) userMessage.getBody();
+	}
+
 }
