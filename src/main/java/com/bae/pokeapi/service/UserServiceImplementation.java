@@ -28,17 +28,6 @@ public class UserServiceImplementation implements UserService {
 
 		return createdUser.getBody();
 
-//		HttpEntity<User> request = new HttpEntity<>(user);
-//		
-//		ResponseEntity<Object> createdUser = restTemplate.exchange("http://localhost:8083/User/create", HttpMethod.POST,
-//				request, Object.class);
-//		
-//		
-//		
-//		User newUser = (User) createdUser.getBody();
-
-//		return newUser;
-
 	}
 
 }
