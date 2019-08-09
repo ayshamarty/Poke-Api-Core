@@ -1,5 +1,7 @@
 package com.bae.pokeapi.controller;
 
+import java.util.Date;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -34,6 +36,9 @@ public class SearchController {
 		Boolean userCheck = new ResponseEntity<>(userService.checkUser(id), HttpStatus.OK).getBody();
 
 		if (userCheck) {
+			Date timeStamp = new Date();
+			timeStamp.toLocaleString();
+			searchService.sendToQueue(id, pokemon, timeStamp);
 			return new ResponseEntity<>(searchService.findPokemon(pokemon), HttpStatus.OK);
 		}
 
@@ -48,7 +53,7 @@ public class SearchController {
 		Boolean userCheck = new ResponseEntity<>(userService.checkUser(id), HttpStatus.OK).getBody();
 
 		if (userCheck) {
-			return new ResponseEntity<>(searchService.findPokemon(type), HttpStatus.OK);
+			return new ResponseEntity<>(searchService.findType(type), HttpStatus.OK);
 		}
 
 		else {
@@ -62,7 +67,7 @@ public class SearchController {
 		Boolean userCheck = new ResponseEntity<>(userService.checkUser(id), HttpStatus.OK).getBody();
 
 		if (userCheck) {
-			return new ResponseEntity<>(searchService.findPokemon(ability), HttpStatus.OK);
+			return new ResponseEntity<>(searchService.findAbility(ability), HttpStatus.OK);
 		}
 
 		else {
